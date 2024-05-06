@@ -1,0 +1,75 @@
+<div class="sign-up-wrapper">
+  <mat-card>
+    <div class="sign-up-container">
+      <div class="sign-up-title-wrapper">
+        <mat-card-title>Sign Up</mat-card-title>
+      </div>
+      <div>
+        <div class="form-container">
+          <form [formGroup]="signUpForm" >
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label> Name
+              </mat-label>
+              <input matInput formControlName="name" type="text" autocomplete="off">
+              <mat-error *ngIf="signUpForm?.controls?.name?.touched && signUpForm?.controls?.name?.['invalid']">
+                <span *ngIf="signUpForm?.controls?.name?.errors?.['required']">Name is required</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label>
+                E-mail
+              </mat-label>
+              <input matInput formControlName="email" required autocomplete="off">
+              <mat-error *ngIf="signUpForm?.controls?.email?.touched && signUpForm?.controls?.email?.['invalid']">
+                <span *ngIf="signUpForm?.controls?.email?.errors?.['required']">Email is required</span>
+                <span *ngIf="signUpForm?.controls?.email?.errors?.['email']">Enter valid email</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label> Phone
+              </mat-label>
+              <input matInput formControlName="phoneNumber" type="text" autocomplete="off">
+              <mat-error *ngIf="signUpForm?.controls?.phoneNumber?.touched && signUpForm?.controls?.phoneNumber?.['invalid']">
+                <span *ngIf="signUpForm?.controls?.phoneNumber?.errors?.['required']">Phone Number is required</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label> Department
+              </mat-label>
+              <mat-select formControlName="department">
+                @for (department of Object.values(DepartmentType); track department) {
+                  <mat-option [value]="department">{{ department }}</mat-option>
+                }
+              </mat-select>
+              <mat-error *ngIf="signUpForm?.controls?.department?.touched && signUpForm?.controls?.department?.['invalid']">
+                <span *ngIf="signUpForm?.controls?.department?.errors?.['required']">Department is required</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label> Password
+              </mat-label>
+              <input matInput formControlName="password" type="password" autocomplete="off">
+              <mat-error *ngIf="signUpForm?.controls?.password?.touched && signUpForm?.controls?.password?.['invalid']">
+                <span *ngIf="signUpForm?.controls?.password?.errors?.['required']">Password is required</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label>Role</mat-label>
+              <mat-select formControlName="role">
+                @for (role of Object.values(UserType); track role) {
+                  <mat-option [value]="role">{{ role }}</mat-option>
+                }
+              </mat-select>
+              <mat-error *ngIf="signUpForm?.controls?.role?.touched && signUpForm?.controls?.role?.['invalid']">
+                <span *ngIf="signUpForm?.controls?.role?.errors?.['required']">Role is required</span>
+              </mat-error>
+            </mat-form-field>
+            <div class="button-wrapper">
+              <button mat-raised-button color="primary" type="button" (click)="submit()">Sign Up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

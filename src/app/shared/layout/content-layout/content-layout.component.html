@@ -1,0 +1,32 @@
+<mat-toolbar color="primary" class="toolbar">
+  <button mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button>
+  <h1 class="app-name">Leave Management</h1>
+  <span class="example-spacer"></span>
+  <div>
+    <mat-chip>{{userInfo.name}}</mat-chip>
+  </div>
+</mat-toolbar>
+<mat-sidenav-container class="content-container" autosize>
+  <mat-sidenav #sidenav class="sidenav" mode="side" opened="true">
+    <mat-nav-list *ngIf="menus$ | async as menus">
+      <mat-list-item *ngFor="let menu of menus" [routerLink]="menu.url" [matTooltip]="!(isExpanded || isShowing) ? menu.name : ''">
+        <div class="menu-list">
+          <span class="full-width" *ngIf="isExpanded || isShowing">{{menu?.name}}</span>
+          <mat-icon mat-list-icon>{{menu?.icon}}</mat-icon>
+        </div>
+      </mat-list-item>
+      <mat-list-item [matTooltip]="!(isExpanded || isShowing) ? 'Logout': ''" (click)="logout()">
+        <div class="menu-list">
+          <span class="full-width" *ngIf="isExpanded || isShowing">Logout</span>
+          <mat-icon mat-list-icon>logout</mat-icon>
+        </div>
+      </mat-list-item>
+    </mat-nav-list>
+    <mat-nav-list>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <div class="sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>

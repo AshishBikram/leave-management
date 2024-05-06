@@ -21,12 +21,21 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@core/*": ["src/app/core/*"],
+      "@state/*": ["src/app/core/state/*"],
+      "@model/*": ["src/app/core/model/*"],
+      "@services/*": ["src/app/core/services/*"],
+      "@guard/*": ["src/app/core/guard/*"],
+      "@shared/*": ["src/app/shared/*"],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
 }

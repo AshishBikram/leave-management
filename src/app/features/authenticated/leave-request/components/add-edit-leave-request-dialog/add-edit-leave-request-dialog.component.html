@@ -1,0 +1,52 @@
+<div class="add-edit-wrapper">
+  <div class="add-edit-header">
+    <h3>{{!data ? "Add Leave Allocation" : "Edit Leave Type"}}</h3>
+  </div>
+  <div>
+    <form [formGroup]="leaveRequestForm" (ngSubmit)="submit()">
+      <mat-form-field class="form-field" appearance="outline" *ngIf="loadLeaveBalance$ | async as leaveBalances">
+        <mat-label>Leave Type</mat-label>
+        <mat-select formControlName="leaveTypeId">
+          @for (leaveBalance of leaveBalances; track leaveBalance) {
+            <mat-option [value]="leaveBalance.leaveType.id">{{ leaveBalance.leaveType.name }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="leaveRequestForm?.controls?.leaveTypeId?.touched && leaveRequestForm?.controls?.leaveTypeId?.['invalid']">
+          <span *ngIf="leaveRequestForm?.controls?.leaveTypeId?.errors?.['required']">Leave Type is required</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input formControlName="fromDate" matStartDate placeholder="Start date">
+          <input formControlName="toDate" (dateChange)="checkDateAvailability()" matEndDate placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>
+          Reason
+        </mat-label>
+        <input matInput formControlName="reason" required>
+        <mat-error *ngIf="leaveRequestForm?.controls?.reason?.touched && leaveRequestForm?.controls?.reason?.['invalid']">
+          <span *ngIf="leaveRequestForm?.controls?.reason?.errors?.['required']">Reason is required</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline" *ngIf="userInfo.role !== UserType.Employee">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          @for (status of Object.values(LeaveStatusType); track status) {
+            <mat-option *ngIf="status !== LeaveStatusType.Pending" [value]="status">{{ status }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="leaveRequestForm?.controls?.status?.touched && leaveRequestForm?.controls?.status?.['invalid']">
+          <span *ngIf="leaveRequestForm?.controls?.status?.errors?.['required']">Status is required</span>
+        </mat-error>
+      </mat-form-field>
+      <div class="button-wrapper">
+        <button mat-raised-button color="primary" type="submit">{{!data ? "Save" : "Update"}}</button>
+      </div>
+    </form>
+  </div>
+</div>

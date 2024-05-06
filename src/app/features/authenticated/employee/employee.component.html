@@ -1,0 +1,43 @@
+<div class="leave-type-wrapper">
+  <div class="leave-type-header">
+    <h1>Employees</h1>
+  </div>
+  <div class="leave-type-body">
+    <ng-container
+      *ngIf="{
+        users: users$ | async,
+        isLoading: isLoading$ | async
+    } as data"
+    >
+      <div class="table-container">
+        <table class="table">
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Department</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Action</th>
+          <tbody>
+          <tr scope="row" *ngFor="let user of data.users">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.department}}</td>
+            <td>{{user.phoneNumber}}</td>
+            <td>
+              <button
+                type="button"
+                color="info"
+                matTooltip="View Leave Allocation"
+                (click)="navigateTo(user.id)"
+                mat-icon-button><mat-icon>preview</mat-icon></button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="empty-table" *ngIf="!data?.users">
+          <h1>No Data Found</h1>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+</div>

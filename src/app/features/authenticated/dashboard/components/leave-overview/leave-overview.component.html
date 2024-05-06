@@ -1,0 +1,68 @@
+<div class="leave-overview-wrapper">
+
+  <mat-card>
+    <div class="leave-overview-container">
+      <div class="leave-overview-header">
+        <h2>Leave Overview</h2>
+      </div>
+      <div class="leave-overview-content">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-tab-group (selectedTabChange)="changeTableView()">
+              <mat-tab label="Today"></mat-tab>
+              <mat-tab label="Tomorrow"></mat-tab>
+            </mat-tab-group>
+          </div>
+          <div class="col-12">
+            <div class="table-filter-wrapper">
+              <mat-form-field class="form-field" appearance="outline" *ngIf="loadLeaveType$ | async as leaveTypes">
+                <mat-label>Leave Type</mat-label>
+                <mat-select [(ngModel)]="leaveTypeId" (selectionChange)="filterData()">
+                  @for (leaveType of leaveTypes; track leaveType) {
+                    <mat-option [value]="leaveType.id">{{ leaveType.name }}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Department</mat-label>
+                <mat-select [(ngModel)]="department" (selectionChange)="filterData()">
+                  @for (department of Object.values(DepartmentType); track department) {
+                    <mat-option [value]="department">{{ department }}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="table-container">
+              <table class="table">
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">Phone No</th>
+                <th scope="col">Leave Type</th>
+                <th scope="col">Days</th>
+                <th scope="col">Reason</th>
+                <tbody>
+                <tr scope="row" *ngFor="let leaveRequest of leaveFilterRequestList">
+                  <td>{{ leaveRequest.id }}</td>
+                  <td>{{ leaveRequest.user.name }}</td>
+                  <td>{{ leaveRequest.user.department }}</td>
+                  <td>{{ leaveRequest.user.phoneNumber }}</td>
+                  <td>{{ leaveRequest.leaveType.name }}</td>
+                  <td>{{ dayjs(leaveRequest.toDate).diff(dayjs(leaveRequest.fromDate), "days") + 1 }}</td>
+                  <td>{{ leaveRequest.reason }}</td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="empty-table" *ngIf="!leaveFilterRequestList">
+                <h1>No Data Found</h1>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>
+

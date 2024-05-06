@@ -1,0 +1,36 @@
+<div class="leave-type-wrapper">
+  <div class="leave-type-header">
+    <h1>Leave Types</h1>
+    <button mat-raised-button color="primary" type="button" (click)="openDialog()">Add Leave</button>
+  </div>
+  <div class="leave-type-body">
+    <ng-container
+      *ngIf="{
+        leaveTypes: loadLeaveType$ | async,
+        isLoading: isLoading$ | async
+    } as data"
+    >
+      <div class="table-container">
+        <table class="table">
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Action</th>
+          <tbody>
+          <tr scope="row" *ngFor="let leaveType of data.leaveTypes">
+            <td>{{leaveType.id}}</td>
+            <td>{{leaveType.name}}</td>
+            <td>
+              <button type="button" color="primary" mat-icon-button (click)="openUpdateDialog(leaveType)"><mat-icon>edit</mat-icon></button>
+              <button type="button" color="info" mat-icon-button (click)="delete(leaveType)"><mat-icon [ngStyle]="{'color':'red'}">delete</mat-icon></button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="empty-table" *ngIf="!data?.leaveTypes">
+          <h1>No Data Found</h1>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+</div>

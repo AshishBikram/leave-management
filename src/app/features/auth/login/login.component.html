@@ -1,0 +1,37 @@
+<div class="login-wrapper">
+  <mat-card>
+    <div class="login-container">
+      <div class="login-title-wrapper">
+        <mat-card-title>Leave Management</mat-card-title>
+      </div>
+      <div>
+        <div class="form-container">
+          <form [formGroup]="loginForm" (ngSubmit)="submit()">
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label>
+                E-mail
+              </mat-label>
+              <input matInput formControlName="email" required>
+              <mat-error *ngIf="loginForm?.controls?.email?.touched && loginForm?.controls?.email?.['invalid']">
+                <span *ngIf="loginForm?.controls?.email?.errors?.['required']">Email is required</span>
+                <span *ngIf="loginForm?.controls?.email?.errors?.['email']">Enter valid email</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label> Password
+              </mat-label>
+              <input matInput formControlName="password" type="password">
+                <mat-error *ngIf="loginForm?.controls?.password?.touched && loginForm?.controls?.password?.['invalid']">
+                  <span *ngIf="loginForm?.controls?.password?.errors?.['required']">Password is require</span>
+                </mat-error>
+            </mat-form-field>
+            <div class="button-wrapper">
+              <button mat-raised-button color="primary" type="submit">Log In</button>
+              <button mat-raised-button color="secondary" type="button" [routerLink]="['/sign-up']">Sign Up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

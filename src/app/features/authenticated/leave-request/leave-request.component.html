@@ -1,0 +1,54 @@
+<div class="leave-request-wrapper">
+  <div class="leave-request-header">
+    <h1>Leave Requests</h1>
+    <button *ngIf="userInfo.role === UserType.Employee" mat-raised-button color="primary" type="button" (click)="openDialog()">Add Leave Request</button>
+  </div>
+  <div class="leave-type-body">
+    <ng-container
+      *ngIf="{
+        leaveRequests: loadLeaveRequest$ | async,
+    } as data"
+    >
+      <div class="table-container">
+        <table class="table">
+          <th scope="col">ID</th>
+          <th scope="col">Leave Type</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">End Date</th>
+          <th scope="col">Days</th>
+          <th scope="col">Reason</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+          <tbody>
+          <tr scope="row" *ngFor="let leaveRequest of data.leaveRequests">
+            <td>{{ leaveRequest.id }}</td>
+            <td>{{ leaveRequest.leaveType.name }}</td>
+            <td>{{ leaveRequest.fromDate | date: 'fullDate' }}</td>
+            <td>{{ leaveRequest.toDate | date: 'fullDate' }}</td>
+            <td>{{dayjs(leaveRequest.toDate).diff(dayjs(leaveRequest.fromDate), "days") + 1}}</td>
+            <td>{{leaveRequest.reason}}</td>
+            <td>{{leaveRequest.status}}</td>
+            <td>
+              <button
+                type="button"
+                color="primary"
+                mat-icon-button
+                [matTooltip]="userInfo.role === UserType.Employee ? 'Edit Leave Request' : 'Approve or Reject Leave'"
+                (click)="openUpdateDialog(leaveRequest)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button *ngIf="userInfo.role === UserType.Employee" type="button" color="info" mat-icon-button (click)="delete(leaveRequest)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="empty-table" *ngIf="!data?.leaveRequests">
+          <h1>No Data Found</h1>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+</div>

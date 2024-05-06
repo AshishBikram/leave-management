@@ -1,0 +1,17 @@
+<div class="pie-graph-wrapper">
+  <div class="pie-graph-container">
+    <div class="pie-graph-header">
+      <h3>Leave Distribution</h3>
+    </div>
+    <div style="display: block;">
+      <canvas baseChart width="300" height="300"
+              [type]="'pie'"
+              [datasets]="pieChartDatasets"
+              [labels]="pieChartLabels"
+              [options]="pieChartOptions"
+              [plugins]="pieChartPlugins"
+              [legend]="pieChartLegend">
+      </canvas>
+    </div>
+  </div>
+</div>

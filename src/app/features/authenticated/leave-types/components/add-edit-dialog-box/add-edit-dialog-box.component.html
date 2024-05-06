@@ -1,0 +1,21 @@
+<div class="add-edit-wrapper">
+  <div class="add-edit-header">
+    <h3>{{!data.id ? "Add Leave Type" : "Edit Leave Type"}}</h3>
+  </div>
+  <div>
+    <form [formGroup]="leaveType" (ngSubmit)="submit()">
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>
+          Name
+        </mat-label>
+        <input matInput formControlName="name" required>
+        <mat-error *ngIf="leaveType?.controls?.name?.touched && leaveType?.controls?.name?.['invalid']">
+          <span *ngIf="leaveType?.controls?.name?.errors?.['required']">Leave Type is required</span>
+        </mat-error>
+      </mat-form-field>
+      <div class="button-wrapper">
+        <button mat-raised-button color="primary" type="submit">{{!data.id ? "Save" : "Update"}}</button>
+      </div>
+    </form>
+  </div>
+</div>

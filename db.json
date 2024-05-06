@@ -1,0 +1,96 @@
+{
+  "users": [
+    {
+      "email": "hari@gmail.com",
+      "password": "$2a$10$fIwHdRNn7dtLzTmCq.ZI1.C7sVJfKd7ySbSVCzdJ.SdK/Ug3pWgrm",
+      "name": "hari",
+      "department": "Frontend",
+      "phoneNumber": "014485424",
+      "role": "Employee",
+      "id": 1
+    },
+    {
+      "email": "hr@gmail.com",
+      "password": "$2a$10$XHIGB4sYc7QEc/p/pu3KBeCRqVFk//oWtNmW9fk8.8k89VqLng3R.",
+      "name": "HR",
+      "department": "Operations",
+      "phoneNumber": "014485424",
+      "role": "HR",
+      "id": 2
+    },
+    {
+      "email": "ram@gmail.com",
+      "password": "$2a$10$w2CxhpAkDlRUq7w0marrb.eUD0wb/Fh0PsPEtVh5Lrrh4ivJ6iDj.",
+      "name": "Ram",
+      "department": "IT",
+      "phoneNumber": "014485424",
+      "role": "HR",
+      "id": 3
+    },
+    {
+      "email": "manager@gmail.com",
+      "password": "$2a$10$n.d/aFezopCOt/9EyRfJReZUIU9cDtUAM58K3OBj.0uTQqKDGBetW",
+      "name": "Manager",
+      "department": "HR",
+      "phoneNumber": "014485424",
+      "role": "Manager",
+      "id": 4
+    }
+  ],
+  "leaveTypes": [
+    {
+      "name": "Causal",
+      "id": 1
+    },
+    {
+      "name": "Sick",
+      "id": 2
+    }
+  ],
+  "leaveAllocations": [
+    {
+      "id": 1,
+      "userId": 1,
+      "leaveTypeId": 1,
+      "days": 20
+    }
+  ],
+  "leaveRequests": [
+    {
+      "id": 1,
+      "userId": 1,
+      "leaveTypeId": 1,
+      "fromDate": "2024-04-30",
+      "toDate": "2024-04-30",
+      "reason": "fasdf",
+      "status": "Approved"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "leaveTypeId": 1,
+      "fromDate": "2024-05-01",
+      "toDate": "2024-05-01",
+      "reason": "fasfd",
+      "status": "Approved"
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "leaveTypeId": 1,
+      "fromDate": "2024-05-14",
+      "toDate": "2024-05-16",
+      "reason": "fasfd",
+      "status": "Approved"
+    },
+    {
+      "id": 4,
+      "userId": 1,
+      "leaveTypeId": 1,
+      "fromDate": "2024-05-06",
+      "toDate": "2024-05-06",
+      "reason": "fasdf",
+      "status": "Approved"
+    }
+  ]
+}

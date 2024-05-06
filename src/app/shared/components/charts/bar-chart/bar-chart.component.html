@@ -1,0 +1,16 @@
+<div class="bar-graph-wrapper">
+  <div class="bar-graph-container">
+    <div class="bar-graph-header">
+      <h3>Departmental Leave Usage</h3>
+    </div>
+    <div style="display: block;">
+      <canvas baseChart width="300" height="300"
+              [data]="barChartData"
+              [options]="barChartOptions"
+              [plugins]="barChartPlugins"
+              [legend]="barChartLegend"
+              [type]="'bar'">
+      </canvas>
+    </div>
+  </div>
+</div>

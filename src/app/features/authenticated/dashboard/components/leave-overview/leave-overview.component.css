@@ -1,0 +1,11 @@
+.leave-overview-wrapper{
+  margin-top: 50px
+}
+.leave-overview-container{
+  padding: 20px 50px;
+}
+.table-filter-wrapper{
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}

@@ -1,0 +1,9 @@
+.add-edit-wrapper{
+  padding: 20px;
+}
+.form-field{
+  width: 100%;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px
+}

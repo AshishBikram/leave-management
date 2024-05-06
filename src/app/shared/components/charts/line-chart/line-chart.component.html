@@ -1,0 +1,15 @@
+<div class="line-graph-wrapper">
+  <div class="line-graph-container">
+    <div class="line-graph-header">
+      <h3>Leave trend</h3>
+    </div>
+    <div style="display: block;">
+      <canvas baseChart width="300" height="300"
+              [type]="'line'"
+              [data]="lineChartData"
+              [options]="lineChartOptions"
+              [legend]="lineChartLegend">
+      </canvas>
+    </div>
+  </div>
+</div>

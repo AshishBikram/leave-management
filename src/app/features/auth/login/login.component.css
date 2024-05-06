@@ -1,0 +1,26 @@
+.login-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.login-title-wrapper{
+  margin-bottom: 20px;
+  text-align: center;
+}
+.login-container{
+  min-width: 300px;
+  padding: 20px;
+}
+.form-field{
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px
+}
+.button-wrapper{
+  display: flex;
+  gap: 10px
+}
+mat-card{
+  padding: 20px;
+}

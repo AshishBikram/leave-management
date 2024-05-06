@@ -1,0 +1,32 @@
+<div class="add-edit-wrapper">
+  <div class="add-edit-header">
+    <h3>{{!data.leaveAllocation ? "Add Leave Allocation" : "Edit Leave Type"}}</h3>
+  </div>
+  <div>
+    <form [formGroup]="leaveAllocationForm" (ngSubmit)="submit()">
+      <mat-form-field class="form-field" appearance="outline" *ngIf="data.loadLeaveType$ | async as leaveTypes">
+        <mat-label>Leave Type</mat-label>
+        <mat-select formControlName="leaveTypeId">
+          @for (leaveType of leaveTypes; track leaveType) {
+            <mat-option [disabled]="data.leaveAllocation && (leaveType.id !== data.leaveAllocation.leaveTypeId)" [value]="leaveType.id">{{ leaveType.name }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="leaveAllocationForm?.controls?.leaveTypeId?.touched && leaveAllocationForm?.controls?.leaveTypeId?.['invalid']">
+          <span *ngIf="leaveAllocationForm?.controls?.leaveTypeId?.errors?.['required']">Leave Type is required</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>
+          Days
+        </mat-label>
+        <input type="number" matInput formControlName="days" required>
+        <mat-error *ngIf="leaveAllocationForm?.controls?.days?.touched && leaveAllocationForm?.controls?.days?.['invalid']">
+          <span *ngIf="leaveAllocationForm?.controls?.days?.errors?.['required']">Days is required</span>
+        </mat-error>
+      </mat-form-field>
+      <div class="button-wrapper">
+        <button mat-raised-button color="primary" type="submit">{{!data.leaveAllocation ? "Save" : "Update"}}</button>
+      </div>
+    </form>
+  </div>
+</div>

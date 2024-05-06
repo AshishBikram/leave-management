@@ -1,0 +1,48 @@
+<div class="leave-allocation-wrapper">
+  <div class="leave-allocation-header">
+    <h1>Leave Allocation</h1>
+    <button
+      *ngIf="filteredLeaveTypes$ | async as filteredLeaveTypes"
+      [disabled]="filteredLeaveTypes.length === 0"
+      mat-raised-button color="primary"
+      type="button"
+      (click)="openDialog()">Add Allocation
+    </button>
+  </div>
+  <div class="leave-allocation-body">
+    <ng-container
+      *ngIf="{
+        loadLeaveAllocation: loadLeaveAllocation$ | async,
+        isLoading: isLoading$ | async
+    } as data"
+    >
+      <div class="table-container">
+        <table class="table">
+          <th scope="col">ID</th>
+          <th scope="col">Leave Type</th>
+          <th scope="col">Days</th>
+          <th scope="col">Action</th>
+          <tbody>
+          <tr scope="row" *ngFor="let leaveAllocation of data.loadLeaveAllocation">
+            <td>{{ leaveAllocation.id }}</td>
+            <td>{{ leaveAllocation.leaveType.name }}</td>
+            <td>{{ leaveAllocation.days }}</td>
+            <td>
+              <button type="button" color="primary" mat-icon-button (click)="openUpdateDialog(leaveAllocation)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button type="button" color="info" mat-icon-button (click)="delete(leaveAllocation)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="empty-table" *ngIf="!data?.loadLeaveAllocation">
+          <h1>No Data Found</h1>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+</div>
