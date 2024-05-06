@@ -76,7 +76,7 @@ export class AddEditLeaveRequestDialogComponent implements OnInit{
     fromDate: new FormControl(new Date(this?.data?.leaveRequest?.fromDate ?? dayjs().add(1).toDate()),[Validators.required]),
     toDate: new FormControl(new Date(this?.data?.leaveRequest?.toDate ?? dayjs().add(1).toDate()),[Validators.required]),
     reason: new FormControl(this?.data?.leaveRequest?.reason ?? "",[Validators.required]),
-    status: new FormControl(this?.data?.leaveRequest?.status ?? LeaveStatusType.Pending)
+    status: new FormControl(this?.data?.leaveRequest?.status ?? "")
   });
 
   ngOnInit() {
@@ -88,6 +88,7 @@ export class AddEditLeaveRequestDialogComponent implements OnInit{
       }
     ));
     this.loadLeaveBalance$ = this.store.select(LeaveBalanceSelector.getLeaveBalances)
+    console.log(this.userInfo.role, UserType.HR)
     if(this.userInfo.role !== UserType.Employee){
       this.leaveRequestForm.controls['status'].setValidators([Validators.required]);
     }
@@ -107,7 +108,7 @@ export class AddEditLeaveRequestDialogComponent implements OnInit{
             fromDate: dayjs(this.leaveRequestForm.value.fromDate).format("YYYY-MM-DD").toString(),
             toDate: dayjs(this.leaveRequestForm.value.toDate).format("YYYY-MM-DD").toString(),
             reason: this.leaveRequestForm.value.reason ?? "",
-            status: this.leaveRequestForm.value.status ?? LeaveStatusType.Pending,
+            status: this.leaveRequestForm.value.status as LeaveStatusType ?? LeaveStatusType.Pending,
           }
         }))
       }else {
@@ -119,7 +120,7 @@ export class AddEditLeaveRequestDialogComponent implements OnInit{
             fromDate: dayjs(this.leaveRequestForm.value.fromDate).format("YYYY-MM-DD").toString(),
             toDate: dayjs(this.leaveRequestForm.value.toDate).format("YYYY-MM-DD").toString(),
             reason: this.leaveRequestForm.value.reason ?? "",
-            status: this.leaveRequestForm.value.status ?? LeaveStatusType.Pending,
+            status: this.leaveRequestForm.value.status as LeaveStatusType ?? LeaveStatusType.Pending,
           }
         }))
         if(this.userInfo.id !== this.data.userId){

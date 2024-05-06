@@ -11,7 +11,7 @@ import {TokenService} from "@services/token/token.service";
 import * as LeaveRequestActions from "@state/actions/leave-request.actions";
 import * as LeaveRequestSelector from "@state/selectors/leave-request.selectors";
 import {Observable, of} from "rxjs";
-import {LeaveRequestResponse} from "@model/leave-request/leave-request";
+import {LeaveRequestResponse, LeaveStatusType} from "@model/leave-request/leave-request";
 import dayjs from "dayjs";
 import {UserSignUpResponse, UserType} from "@model/user/user";
 import {MatTooltip} from "@angular/material/tooltip";
@@ -82,4 +82,5 @@ export class LeaveRequestComponent implements OnInit{
   }
 
   protected readonly UserType = UserType;
+  protected readonly LeaveStatusType = LeaveStatusType;
 }

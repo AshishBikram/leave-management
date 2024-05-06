@@ -30,6 +30,7 @@
             <td>{{leaveRequest.status}}</td>
             <td>
               <button
+                *ngIf="!(userInfo.role === UserType.Employee && leaveRequest.status !== LeaveStatusType.Pending)"
                 type="button"
                 color="primary"
                 mat-icon-button
@@ -37,7 +38,12 @@
                 (click)="openUpdateDialog(leaveRequest)">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button *ngIf="userInfo.role === UserType.Employee" type="button" color="info" mat-icon-button (click)="delete(leaveRequest)">
+              <button
+                *ngIf="userInfo.role === UserType.Employee"
+                type="button"
+                color="info"
+                mat-icon-button
+                (click)="delete(leaveRequest)">
                 <mat-icon>delete</mat-icon>
               </button>
             </td>
